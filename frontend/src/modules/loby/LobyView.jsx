@@ -1,55 +1,89 @@
 import React from 'react'
-import { Input } from '@chakra-ui/input'
-import { Container, Flex, Text, VStack } from '@chakra-ui/layout'
-import { Skeleton } from '@chakra-ui/skeleton'
+import {
+  Button,
+  Grid,
+  makeStyles,
+  TextField,
+  Typography,
+} from '@material-ui/core'
+import Skeleton from '@material-ui/lab/Skeleton'
+
+const useStyles = makeStyles(() => ({
+  gridContainer: {
+    minHeight: '100vh',
+  },
+  userForm: {
+    width: 200,
+  },
+  button: {
+    textTransform: 'capitalize',
+  },
+}))
 
 const LobyView = () => {
+  const classes = useStyles()
   return (
-    <>
-      <Container backgroundColor="#F8E6CB" maxW="100vw">
-        <Flex
-          maxW="container.xl"
-          height="100vh"
-          justifyContent="center"
-          alignItems="center"
-          color="white"
-        >
-          <VStack spacing={1} align="stretch">
-            <Flex
-              flexDirection="row"
-              justifyContent="space-around"
-              alignItems="center"
-            >
-              <Text color="#332851" textAlign="center" fontSize="3xl">
-                users connected
-              </Text>
-              <Skeleton
-                height="10px"
-                width="10px"
-                startColor="green.500"
-                endColor="green.900"
-                borderRadius="50%"
-              />
-            </Flex>
-            <Text
-              color="#332851"
-              fontWeight="bold"
-              textAlign="center"
-              fontSize="9xl"
-            >
-              1234
-            </Text>
-            <Input
-              color="#332851"
-              borderColor="#332851"
-              focusBorderColor="#332851"
-              textAlign="center"
-              placeholder="Create your username"
-            />
-          </VStack>
-        </Flex>
-      </Container>
-    </>
+    <Grid
+      alignItems="center"
+      className={classes.gridContainer}
+      container
+      spacing={4}
+      direction="column"
+      justify="center"
+    >
+      <Grid
+        item
+        xs={10}
+        sm={6}
+        md={4}
+        lg={3}
+        container
+        direction="row"
+        alignItems="center"
+        justify="space-around"
+      >
+        <Grid item>
+          <Typography variant="h3" component="h2">
+            Users connected
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Skeleton variant="circle" width={10} height={10} />
+        </Grid>
+      </Grid>
+
+      <Grid item>
+        <Typography variant="h1" component="h2" stype={{ borderRadius: '5px' }}>
+          <Skeleton variant="rect" border>
+            12345
+          </Skeleton>
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing={5}
+      >
+        <Grid item>
+          {' '}
+          <TextField
+            id="standard-name"
+            label="Name"
+            // value={name}
+            // onChange={handleChange}
+          />
+        </Grid>
+        <Grid item>
+          <Button className={classes.button}>Create</Button>
+          {/* <Button className={classes.button} disabled>
+              That name is busy
+            </Button> */}
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }
 
