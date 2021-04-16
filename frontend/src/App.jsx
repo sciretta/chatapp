@@ -1,27 +1,27 @@
+import { Container, CssBaseline, ThemeProvider } from '@material-ui/core'
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import ChatView from './modules/chat/ChatView'
+import LobyView from './modules/loby/LobyView'
+import theme from './theme'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.js laishfoas</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          prope="some preoewk"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme('dark')}>
+      <Container>
+        <CssBaseline />
+        <Router>
+          <Switch>
+            <Route path="/loby" exact>
+              <LobyView />
+            </Route>
+            <Route path="/" exact>
+              <ChatView />
+            </Route>
+          </Switch>
+        </Router>
+      </Container>
+    </ThemeProvider>
   )
 }
-
 export default App

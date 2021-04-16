@@ -17,5 +17,13 @@
     "sourceType": "module"
   },
   "plugins": ["react", "prettier"],
-  "rules": {}
+  "rules": {
+    "import/no-extraneous-dependencies": ["off"],
+    "no-unused-vars": "warn",
+    "import/prefer-default-export": ["off"],
+    "react/prop-types": ["off"],
+    "react/destructuring-assignment": ["off"],
+    "react/jsx-props-no-spreading": ["off"],
+    "no-plusplus": "off"
+  }
 }
