@@ -1,24 +1,7 @@
 import React from 'react'
-import {
-  Button,
-  Grid,
-  makeStyles,
-  TextField,
-  Typography,
-} from '@material-ui/core'
+import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
-
-const useStyles = makeStyles(() => ({
-  gridContainer: {
-    minHeight: '100vh',
-  },
-  userForm: {
-    width: 200,
-  },
-  button: {
-    textTransform: 'capitalize',
-  },
-}))
+import useStyles from './loby-styles'
 
 const LobyView = () => {
   const classes = useStyles()
@@ -68,10 +51,9 @@ const LobyView = () => {
         spacing={5}
       >
         <Grid item>
-          {' '}
           <TextField
             id="standard-name"
-            label="Name"
+            label="Username"
             // value={name}
             // onChange={handleChange}
           />

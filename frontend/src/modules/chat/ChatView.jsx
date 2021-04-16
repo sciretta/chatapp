@@ -1,6 +1,9 @@
 import React from 'react'
-import { Grid, Paper } from '@material-ui/core'
-import useStyles from './styles'
+import { Grid } from '@material-ui/core'
+import useStyles from './chat-styles'
+import CurrentChats from './CurrentChats'
+import MainChat from './MainChat'
+import SearchUser from './SearchUser'
 
 const ChatView = () => {
   const classes = useStyles()
@@ -13,14 +16,30 @@ const ChatView = () => {
       direction="row"
       justify="center"
     >
-      <Grid className={classes.border} item container md={3} justify="center">
-        <Paper className={classes.paper}>chat users</Paper>
+      <Grid
+        className={`${classes.border}`}
+        item
+        container
+        sm={3}
+        md={3}
+        lg={3}
+        justify="center"
+      >
+        <CurrentChats />
       </Grid>
-      <Grid className={classes.border} item container md={3} justify="center">
-        <Paper className={classes.paper}>chat</Paper>
+      <Grid
+        className={`${classes.border}`}
+        item
+        container
+        sm={6}
+        md={6}
+        lg={6}
+        justify="center"
+      >
+        <MainChat />
       </Grid>
-      <Grid className={classes.border} item container md={3}>
-        search user
+      <Grid className={classes.border} item container sm={3} md={3} lg={3}>
+        <SearchUser />
       </Grid>
     </Grid>
   )
