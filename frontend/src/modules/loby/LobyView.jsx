@@ -1,10 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
 import useStyles from './loby-styles'
+import { useSocket } from '../../SocketContext'
 
 const LobyView = () => {
+  const [username, setUsername] = useState('')
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState(false)
   const classes = useStyles()
+  const socket = useSocket()
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('is-available', (isAvailable) =>
+        setIsUsernameAvailable(isAvailable),
+      )
+    }
+  }, [socket])
+
+  useEffect(() => {
+    if (socket) {
+      socket.emit('check-user', { username }, (res) => {
+        console.log({ res })
+      })
+    }
+  }, [username])
+
+  const handleUserName = (e) => {
+    setUsername(e.target.value)
+  }
+
+  const onCreateUser = () => {
+    // socket.emit('create-user', { username })
+  }
+
   return (
     <Grid
       alignItems="center"
@@ -34,7 +63,6 @@ const LobyView = () => {
           <Skeleton variant="circle" width={10} height={10} />
         </Grid>
       </Grid>
-
       <Grid item>
         <Typography variant="h1" component="h2" stype={{ borderRadius: '5px' }}>
           <Skeleton variant="rect" border>
@@ -54,15 +82,21 @@ const LobyView = () => {
           <TextField
             id="standard-name"
             label="Username"
-            // value={name}
-            // onChange={handleChange}
+            value={username}
+            onChange={handleUserName}
+            onE
           />
         </Grid>
         <Grid item>
-          <Button className={classes.button}>Create</Button>
-          {/* <Button className={classes.button} disabled>
+          {isUsernameAvailable ? (
+            <Button className={classes.button} onClick={() => onCreateUser()}>
+              Create temporal user
+            </Button>
+          ) : (
+            <Button className={classes.button} disabled>
               That name is busy
-            </Button> */}
+            </Button>
+          )}
         </Grid>
       </Grid>
     </Grid>

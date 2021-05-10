@@ -4,12 +4,14 @@ const storeContext = createContext()
 const dispatchContext = createContext()
 
 const initialState = {
-  cart: [],
+  username: '',
 }
 
 const reducer = (state, action) => {
-  switch (action.type) {
-    case '':
+  const { type, payload } = action
+  switch (type) {
+    case 'SET_USERNAME':
+      return { username: payload.username, ...state }
     default:
       return state
   }
@@ -20,7 +22,9 @@ const StoreProvider = ({ children }) => {
 
   return (
     <dispatchContext.Provider value={dispatch}>
-      <storeContext.Provider value={state}>{children}</storeContext.Provider>
+      <storeContext.Provider value={state}>
+        {children(state.username)}
+      </storeContext.Provider>
     </dispatchContext.Provider>
   )
 }
