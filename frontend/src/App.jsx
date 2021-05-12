@@ -10,8 +10,8 @@ import { SocketProvider } from './SocketContext'
 function App() {
   return (
     <StoreProvider>
-      {() => (
-        <SocketProvider username="username por props">
+      {(username) => (
+        <SocketProvider username={username}>
           <ThemeProvider theme={theme('dark')}>
             <Container>
               <CssBaseline />

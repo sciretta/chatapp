@@ -11,7 +11,7 @@ const reducer = (state, action) => {
   const { type, payload } = action
   switch (type) {
     case 'SET_USERNAME':
-      return { username: payload.username, ...state }
+      return { ...state, username: payload.username }
     default:
       return state
   }

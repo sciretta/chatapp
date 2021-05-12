@@ -10,7 +10,6 @@
   },
   "plugins": ["prettier"],
   "rules": {
-    "no-console": "off",
     "prefer-template": "off",
     "import/newline-after-import": "off"
   }

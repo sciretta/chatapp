@@ -1,37 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
 import useStyles from './loby-styles'
-import { useSocket } from '../../SocketContext'
+import { useUserDisponibylity } from './loby-hooks'
 
 const LobyView = () => {
   const [username, setUsername] = useState('')
-  const [isUsernameAvailable, setIsUsernameAvailable] = useState(false)
   const classes = useStyles()
-  const socket = useSocket()
-
-  useEffect(() => {
-    if (socket) {
-      socket.on('is-available', (isAvailable) =>
-        setIsUsernameAvailable(isAvailable),
-      )
-    }
-  }, [socket])
-
-  useEffect(() => {
-    if (socket) {
-      socket.emit('check-user', { username }, (res) => {
-        console.log({ res })
-      })
-    }
-  }, [username])
+  const { isUsernameAvailable, onCreateUser } = useUserDisponibylity(username)
 
   const handleUserName = (e) => {
     setUsername(e.target.value)
-  }
-
-  const onCreateUser = () => {
-    // socket.emit('create-user', { username })
   }
 
   return (
