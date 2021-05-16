@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
 import useStyles from './loby-styles'
 import { useUserDisponibylity } from './loby-hooks'
+import { useSocket } from '../../SocketContext'
 
 const LobyView = () => {
   const [username, setUsername] = useState('')
+  const [usersConnected, setUsersConnected] = useState(0)
+  const socket = useSocket()
   const classes = useStyles()
   const { isUsernameAvailable, onCreateUser } = useUserDisponibylity(username)
+
+  useEffect(() => {
+    if (!socket) return
+    socket.on('total-users', (totalUsers) => {
+      setUsersConnected(totalUsers)
+    })
+  }, [socket])
 
   const handleUserName = (e) => {
     setUsername(e.target.value)
@@ -43,10 +53,8 @@ const LobyView = () => {
         </Grid>
       </Grid>
       <Grid item>
-        <Typography variant="h1" component="h2" stype={{ borderRadius: '5px' }}>
-          <Skeleton variant="rect" border>
-            12345
-          </Skeleton>
+        <Typography variant="h1" component="h2" style={{ borderRadius: '5px' }}>
+          <Skeleton variant="rect">{usersConnected}</Skeleton>
         </Typography>
       </Grid>
       <Grid

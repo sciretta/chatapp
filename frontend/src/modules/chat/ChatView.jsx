@@ -16,26 +16,10 @@ const ChatView = () => {
       direction="row"
       justify="center"
     >
-      <Grid
-        className={`${classes.border}`}
-        item
-        container
-        sm={3}
-        md={3}
-        lg={3}
-        justify="center"
-      >
+      <Grid item container sm={3} md={3} lg={3} justify="center">
         <CurrentChats />
       </Grid>
-      <Grid
-        className={`${classes.border}`}
-        item
-        container
-        sm={6}
-        md={6}
-        lg={6}
-        justify="center"
-      >
+      <Grid item container sm={6} md={6} lg={6} justify="center">
         <MainChat />
       </Grid>
       <Grid className={classes.border} item container sm={3} md={3} lg={3}>

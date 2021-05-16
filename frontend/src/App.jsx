@@ -1,6 +1,11 @@
 import React from 'react'
 import { Container, CssBaseline, ThemeProvider } from '@material-ui/core'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 import StoreProvider from './Context'
 import ChatView from './modules/chat/ChatView'
 import LobyView from './modules/loby/LobyView'
@@ -18,10 +23,10 @@ function App() {
               <Router>
                 <Switch>
                   <Route path="/loby" exact>
-                    <LobyView />
+                    {username ? <Redirect to="/" /> : <LobyView />}
                   </Route>
                   <Route path="/" exact>
-                    <ChatView />
+                    {username ? <ChatView /> : <Redirect to="/loby" />}
                   </Route>
                 </Switch>
               </Router>

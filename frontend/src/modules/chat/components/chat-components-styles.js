@@ -38,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
   textDate: {
     textAlign: 'end',
   },
+  userGridTab: {
+    width: '100%',
+    padding: 5,
+    height: 45,
+    marginTop: 1,
+  },
 }))
 
 export default useStyles

@@ -14,11 +14,11 @@ export const useUserDisponibylity = (username) => {
     )
 
     socket.on('user-available', (usernameCreated) => {
-      if (usernameCreated)
-        dispatch({
-          type: 'SET_USERNAME',
-          payload: { username: usernameCreated },
-        })
+      if (!usernameCreated) return
+      dispatch({
+        type: 'SET_USERNAME',
+        payload: { username: usernameCreated },
+      })
     })
   }, [socket])
 

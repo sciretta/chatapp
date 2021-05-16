@@ -17,6 +17,7 @@ const Search = ({ placeholder, onSubmit, initialValue = '', ...props }) => {
     >
       <Paper component="form" className={classes.inputPaper}>
         <InputBase
+          {...props}
           className={classes.input}
           placeholder={placeholder}
           value={value}

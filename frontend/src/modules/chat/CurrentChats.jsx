@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Paper } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 import useStyles from './chat-styles'
 /* eslint-disable-next-line import/no-cycle */
 import Search from './components/Search'
 import CurrentChatTab from './components/CurrentChatTab'
 import { textShortener } from '../utils'
+import { useStore } from '../../Context'
 
 // global state
 export const currentChats = [
@@ -31,21 +32,17 @@ export const currentChats = [
 
 const CurrentChats = () => {
   const [chatsFiltered, setChatsFiltered] = useState([])
+  const { username } = useStore()
   const classes = useStyles()
 
-  useEffect(() => {
-    setTimeout(() => {
-      setChatsFiltered([
-        ...currentChats,
-        ...currentChats,
-        ...currentChats,
-        ...currentChats,
-      ])
-    }, 3000)
-  }, [])
   return (
     <Paper className={`${classes.paper} ${classes.chatsPaper}`}>
       <Grid container direction="column" justify="flex-start">
+        <Grid item justify="center">
+          <Typography variant="h6" className={classes.username}>
+            {username}
+          </Typography>
+        </Grid>
         <Grid item>
           <Search
             placeholder="Search chats"

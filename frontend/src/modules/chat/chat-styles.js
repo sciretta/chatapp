@@ -3,10 +3,6 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(() => ({
   gridContainer: {
     minHeight: '100vh',
-    border: '1px dashed black',
-  },
-  border: {
-    border: '1px dashed black',
   },
   paper: {
     minHeight: '90vh',
@@ -30,6 +26,9 @@ const useStyles = makeStyles(() => ({
     maxHeight: '80vh',
     scrollBehavior: 'smooth',
     paddingBottom: 10,
+  },
+  username: {
+    textAlign: 'center',
   },
 }))
 

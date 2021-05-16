@@ -7,9 +7,9 @@ export const SocketProvider = ({ username, children }) => {
   const [socket, setSocket] = useState()
 
   useEffect(() => {
-    const newSocket = io('', { query: { username } })
+    const newSocket = io('')
     setSocket(newSocket)
-    return () => newSocket.close()
+    // return () => newSocket.close()
   }, [username])
 
   return (
