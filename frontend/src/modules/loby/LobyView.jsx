@@ -53,7 +53,7 @@ const LobyView = () => {
         </Grid>
       </Grid>
       <Grid item>
-        <Typography variant="h1" component="h2" style={{ borderRadius: '5px' }}>
+        <Typography variant="h1" component="h2">
           <Skeleton variant="rect">{usersConnected}</Skeleton>
         </Typography>
       </Grid>

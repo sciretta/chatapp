@@ -13,7 +13,7 @@ const isUsernameAvaliable = (username) =>
   !users.map((user) => user.username).includes(username) && username.length >= 3
 
 io.on('connection', (socket) => {
-  io.emit('total-users', users.length)
+  io.to(socket.id).emit('total-users', users.length)
 
   socket.on('check-user', (username) => {
     if (isUsernameAvaliable(username)) {
@@ -25,6 +25,7 @@ io.on('connection', (socket) => {
     if (isUsernameAvaliable(username)) {
       users = [...users, { username, id: socket.id }]
       socket.emit('user-available', username)
+      io.emit('total-users', users.length)
     } else {
       socket.emit('user-available', false)
     }
@@ -40,11 +41,19 @@ io.on('connection', (socket) => {
     }
   })
 
+  socket.on('send-message', (messageData) => {
+    console.log({ messageData })
+    const to = users.find((user) => user.username === messageData.to)
+
+    socket.to(to?.id).emit('recieve-message', messageData)
+    socket.emit('message-sent', messageData)
+  })
+
   socket.on('disconnect', () => {
     users = users.filter((user) => user.id !== socket.id)
 
     /* eslint-disable-next-line no-console */
-    console.log('user disconnected')
+    console.log('user disconnected', socket.id)
     io.emit('total-users', users.length)
     console.log({ users })
   })

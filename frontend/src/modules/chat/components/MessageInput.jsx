@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid } from '@material-ui/core'
 import Paper from '@material-ui/core/Paper'
 import InputBase from '@material-ui/core/InputBase'
@@ -6,14 +6,24 @@ import IconButton from '@material-ui/core/IconButton'
 import SendIcon from '@material-ui/icons/Send'
 import MicIcon from '@material-ui/icons/Mic'
 import useStyles from './chat-components-styles'
+import { useSocket } from '../../../SocketContext'
+import { useStore } from '../../../Context'
 
 const MessageInput = () => {
   const classes = useStyles()
+  const [message, setMessage] = useState('')
+  const socket = useSocket()
+  const { username, chattingWith } = useStore()
 
   useEffect(() => {
     const objDiv = document.getElementById('scroll_reference')
     objDiv.scrollTop = objDiv.scrollHeight
   }, [])
+
+  const sendMessage = () => {
+    if (!socket) return
+    socket.emit('send-message', { message, from: username, to: chattingWith })
+  }
 
   return (
     <Grid
@@ -26,6 +36,9 @@ const MessageInput = () => {
           <InputBase
             className={classes.input}
             placeholder="Write something ..."
+            onChange={(e) => {
+              setMessage(e.target.value)
+            }}
           />
           <IconButton
             type="submit"
@@ -33,7 +46,7 @@ const MessageInput = () => {
             aria-label="write message"
             onClick={(e) => {
               e.preventDefault()
-              console.log('submiting')
+              sendMessage()
             }}
           >
             <SendIcon />

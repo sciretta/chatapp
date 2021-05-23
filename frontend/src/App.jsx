@@ -16,22 +16,28 @@ function App() {
   return (
     <StoreProvider>
       {(username) => (
-        <SocketProvider username={username}>
-          <ThemeProvider theme={theme('dark')}>
-            <Container>
-              <CssBaseline />
-              <Router>
-                <Switch>
-                  <Route path="/loby" exact>
-                    {username ? <Redirect to="/" /> : <LobyView />}
-                  </Route>
-                  <Route path="/" exact>
-                    {username ? <ChatView /> : <Redirect to="/loby" />}
-                  </Route>
-                </Switch>
-              </Router>
-            </Container>
-          </ThemeProvider>
+        <SocketProvider>
+          {(socket) => (
+            <ThemeProvider theme={theme('dark')}>
+              <Container>
+                <CssBaseline />
+                <Router>
+                  <Switch>
+                    <Route path="/loby" exact>
+                      {username && socket ? <Redirect to="/" /> : <LobyView />}
+                    </Route>
+                    <Route path="/" exact>
+                      {username && socket ? (
+                        <ChatView />
+                      ) : (
+                        <Redirect to="/loby" />
+                      )}
+                    </Route>
+                  </Switch>
+                </Router>
+              </Container>
+            </ThemeProvider>
+          )}
         </SocketProvider>
       )}
     </StoreProvider>

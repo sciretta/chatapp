@@ -1,9 +1,10 @@
 import React from 'react'
 import { Grid, SnackbarContent } from '@material-ui/core'
 import useStyles from './chat-components-styles'
+import { useStore } from '../../../Context'
 
 const MessageChip = ({ text, ...props }) => {
-  const myUser = 'myuser'
+  const { username: myUser } = useStore()
   const classes = useStyles()
   return (
     <Grid container justify={props.from === myUser ? 'flex-end' : 'flex-start'}>

@@ -6,12 +6,12 @@ export const useSearchUsers = () => {
   const [userInput, setUserInput] = useState('')
   const [users, setUsers] = useState([])
   useEffect(() => {
-    if (!socket) return
+    // if (!socket) return
     socket.on('users-found', (usersList) => setUsers(usersList))
   }, [socket])
 
   useEffect(() => {
-    if (!socket) return
+    // if (!socket) return
     socket.emit('search-user', userInput)
   }, [userInput])
   return { users, setUserInput }

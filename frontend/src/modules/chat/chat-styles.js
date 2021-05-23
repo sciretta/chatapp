@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   },
   currentChatsContainer: {
     overflowY: 'scroll',
-    height: '80vh',
+    height: '75vh',
   },
   mainChatPaper: {
     minWidth: '100%',
@@ -23,6 +23,7 @@ const useStyles = makeStyles(() => ({
   },
   messagesZone: {
     overflowY: 'scroll',
+    height: '100%',
     maxHeight: '80vh',
     scrollBehavior: 'smooth',
     paddingBottom: 10,
