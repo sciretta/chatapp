@@ -1,7 +1,6 @@
 import React from 'react'
 import { Grid, Paper } from '@material-ui/core'
 import useStyles from './chat-styles'
-/* eslint-disable-next-line import/no-cycle */
 import Search from './components/Search'
 import UserTab from './components/UserTab'
 import { useSearchUsers } from './chat-hooks'
@@ -13,7 +12,7 @@ const SearchUser = () => {
   return (
     <Paper className={`${classes.paper} ${classes.chatsPaper}`}>
       <Grid container direction="column" justify="flex-start">
-        <Grid item>
+        <Grid item className={classes.usernameGrid}>
           <Search
             placeholder="Search users"
             onSubmit={(value) => setUserInput(value)}

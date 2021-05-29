@@ -21,8 +21,9 @@ const MessageInput = () => {
   }, [])
 
   const sendMessage = () => {
-    if (!socket) return
+    if (!message) return
     socket.emit('send-message', { message, from: username, to: chattingWith })
+    setMessage('')
   }
 
   return (
@@ -36,6 +37,7 @@ const MessageInput = () => {
           <InputBase
             className={classes.input}
             placeholder="Write something ..."
+            value={message}
             onChange={(e) => {
               setMessage(e.target.value)
             }}

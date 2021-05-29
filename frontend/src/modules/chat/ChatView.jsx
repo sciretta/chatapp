@@ -9,11 +9,11 @@ const ChatView = () => {
   const classes = useStyles()
   return (
     <Grid
-      alignItems="center"
       className={classes.gridContainer}
       container
       spacing={1}
       direction="row"
+      alignItems="center"
       justify="center"
     >
       <Grid item container sm={3} md={3} lg={3} justify="center">

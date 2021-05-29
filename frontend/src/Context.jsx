@@ -7,29 +7,8 @@ const initialState = {
   username: '',
   chattingWith: '',
   chats: [],
-  messages: [
-    {
-      from: 'someuser',
-      to: 'myuser',
-      time: '22:04',
-      text: 'some text sent',
-    },
-  ],
-  currentChats: [
-    {
-      from: 'someuser',
-      lastText:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quibusdam exercitationem, vitae neque inventore veritatis atque earum sunt laboriosam placeat vel perferendis libero error beatae. Aperiam fugit similique a officia!',
-      read: true,
-      timeLastText: '22:22',
-    },
-    {
-      from: 'anotheruser',
-      lastText: 'hey man how are you ',
-      read: true,
-      timeLastText: '10:08',
-    },
-  ],
+  messages: [],
+  currentChats: [],
 }
 
 const reducer = (state, action) => {
@@ -41,9 +20,43 @@ const reducer = (state, action) => {
       return { ...state, chattingWith: payload.chattingWith }
     }
     case 'NEW_MESSAGE':
+      const { newMessage } = payload
+      const existingChat = state.messages.find(
+        (m) => m.from === newMessage.from || m.to === newMessage.from,
+      )
+      const isSending = newMessage.from === state.username
+
+      if (isSending && !state.chattingWith) return state
+
+      if (!existingChat)
+        return {
+          ...state,
+          messages: [...state.messages, newMessage],
+          currentChats: [
+            ...state.currentChats,
+            {
+              from: isSending ? newMessage.to : newMessage.from,
+              lastText: newMessage.text,
+              read: false,
+              timeLastText: newMessage.time,
+            },
+          ],
+        }
+
       return {
         ...state,
         messages: [...state.messages, payload.newMessage],
+        currentChats: [
+          ...state.currentChats.filter(
+            (cc) => !(cc.from === newMessage.to || cc.from === newMessage.from),
+          ),
+          {
+            from: isSending ? newMessage.to : newMessage.from,
+            lastText: newMessage.text,
+            read: false,
+            timeLastText: newMessage.time,
+          },
+        ].reverse(),
       }
     default:
       return state

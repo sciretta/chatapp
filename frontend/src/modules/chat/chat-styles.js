@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
   gridContainer: {
-    minHeight: '100vh',
+    minHeight: '95vh',
   },
   paper: {
     minHeight: '90vh',
@@ -12,24 +12,30 @@ const useStyles = makeStyles(() => ({
   },
   currentChatsContainer: {
     overflowY: 'scroll',
-    height: '75vh',
+    height: '80vh',
   },
   mainChatPaper: {
     minWidth: '100%',
   },
   mainChatContainer: {
     height: '100%',
-    maxHeight: '90vh',
+    maxHeight: '85vh',
   },
   messagesZone: {
     overflowY: 'scroll',
     height: '100%',
-    maxHeight: '80vh',
+    maxHeight: '75vh',
     scrollBehavior: 'smooth',
     paddingBottom: 10,
   },
   username: {
     textAlign: 'center',
+  },
+  usernameGrid: {
+    height: '12vh',
+  },
+  chattingWith: {
+    height: '6vh',
   },
 }))
 

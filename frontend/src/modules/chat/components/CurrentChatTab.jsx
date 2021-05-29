@@ -2,15 +2,23 @@ import React from 'react'
 import ToggleButton from '@material-ui/lab/ToggleButton'
 import { Grid, Typography } from '@material-ui/core'
 import useStyles from './chat-components-styles'
+import { useDispatch, useStore } from '../../../Context'
 
-const CurrentChatTab = ({ ...props }) => {
+const CurrentChatTab = (props) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const { chattingWith } = useStore()
 
-  const chattingWith = 'someuser'
   return (
     <ToggleButton
       selected={props.from === chattingWith}
       className={classes.chatGridTab}
+      onClick={() =>
+        dispatch({
+          type: 'SET_CHATTING_WITH',
+          payload: { chattingWith: props.from },
+        })
+      }
     >
       <Grid item container direction="column">
         <Grid item container justify="flex-start">

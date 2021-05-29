@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const http = require('http')
+const moment = require('moment')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const io = new Server(server)
@@ -42,18 +43,21 @@ io.on('connection', (socket) => {
   })
 
   socket.on('send-message', (messageData) => {
-    console.log({ messageData })
     const to = users.find((user) => user.username === messageData.to)
 
-    socket.to(to?.id).emit('recieve-message', messageData)
-    socket.emit('message-sent', messageData)
+    socket.to(to?.id).emit('recieve-message', {
+      ...messageData,
+      time: moment().format('HH:mm'),
+    })
+    socket.emit('message-sent', {
+      ...messageData,
+      time: moment().format('HH:mm'),
+    })
   })
 
   socket.on('disconnect', () => {
     users = users.filter((user) => user.id !== socket.id)
 
-    /* eslint-disable-next-line no-console */
-    console.log('user disconnected', socket.id)
     io.emit('total-users', users.length)
     console.log({ users })
   })
