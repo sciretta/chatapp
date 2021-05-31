@@ -1,4 +1,4 @@
-const findUsername = (usernameValue, usernamesArr = []) => {
+exports.findUsername = (usernameValue, usernamesArr = []) => {
   let results = []
   usernamesArr.forEach((username) => {
     const isContained = username.includes(usernameValue)
@@ -9,4 +9,7 @@ const findUsername = (usernameValue, usernamesArr = []) => {
   return results
 }
 
-exports.findUsername = findUsername
+exports.isUsernameAvaliable = (username, users) =>
+  !!users &&
+  !users?.map((user) => user.username).includes(username) &&
+  username.length >= 3
