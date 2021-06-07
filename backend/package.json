@@ -9,7 +9,6 @@
     "tests": "cross-env NODE_ENV=test jest",
     "tests-watch": "cross-env NODE_ENV=test jest --watch"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
