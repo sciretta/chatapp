@@ -3,7 +3,7 @@ const { Server } = require('socket.io')
 const Client = require('socket.io-client')
 const { isUsernameAvaliable, findUsername } = require('../utils')
 
-describe.skip('Utils functions', () => {
+describe('Utils functions', () => {
   test('Is username available', () => {
     const usernameInput = 'username'
     const available = isUsernameAvaliable(usernameInput, [])
@@ -42,7 +42,7 @@ describe('Socket events', () => {
     clientSocket.close()
   })
 
-  test.skip('Check user available', (done) => {
+  test('Check user available', (done) => {
     const usernameInput = 'username'
     serverSocket.on('check-user', (username) => {
       expect(username).toBe(usernameInput)
@@ -60,7 +60,7 @@ describe('Socket events', () => {
     clientSocket.emit('check-user', usernameInput)
   })
 
-  test.skip('Create new user', (done) => {
+  test('Create new user', (done) => {
     const usernameInput = 'username'
     let users = []
     const initialLength = users.length
@@ -92,7 +92,7 @@ describe('Socket events', () => {
     clientSocket.emit('new-user', usernameInput)
   })
 
-  test.skip('Search user', (done) => {
+  test('Search user', (done) => {
     const usernameInput = 'username'
     const users = [{ username: usernameInput, id: 1 }]
     let usersFiltered = []

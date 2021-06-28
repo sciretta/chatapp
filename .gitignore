@@ -3,4 +3,5 @@
 /frontend/coverage
 /backend/node_modules
 /backend/build
+/backend/coverage
 /node_modules
